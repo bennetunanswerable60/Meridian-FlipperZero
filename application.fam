@@ -1,0 +1,23 @@
+App(
+    appid="meridian",
+    name="Meridian",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="meridian_app",
+    stack_size=4 * 1024,
+    fap_category="GPIO",
+    fap_icon="icons/meridian_10px.png",
+    fap_icon_assets="icons",
+    fap_author="at0m-b0mb",
+    fap_weburl="https://github.com/at0m-b0mb/Meridian-FlipperZero",
+    fap_version="1.0",
+    # Explicit, so the recursive default does not sweep test/ (host-only code)
+    # into the firmware build.
+    sources=[
+        "meridian.c",
+        "helpers/*.c",
+        "views/*.c",
+        "scenes/*.c",
+    ],
+    fap_description="Is anything lying to you about where you are? Civil GPS arrives below the thermal noise floor, unencrypted and unsigned, so anything that transmits the same structure a few decibels louder is believed completely. Meridian reads NMEA from any GPS module on the GPIO header and watches eleven things a genuine sky does that a transmitter has to imitate: carrier power that rises with elevation and spreads over several dB, geometry that drifts minute by minute, a fix that wanders a metre or two because it is computed rather than recited, and a receiver clock that tracks the Flipper's own. Live sky plot, carrier bar chart, drift scatter and a plain-English evidence list with the innocent explanation printed beside every finding. Jamming is reported separately from spoofing. A built-in simulator runs the real detector against seven synthetic scenarios, so it works with no hardware at all. Receive only: there is no transmit path.",
+    requires=["gui"],
+)

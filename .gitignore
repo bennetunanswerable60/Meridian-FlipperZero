@@ -1,0 +1,14 @@
+# ufbt build output
+.ufbt/
+build/
+*.o
+*.d
+
+# host test binaries
+test/host_nmea_test
+test/host_detect_test
+test/*.dSYM/
+
+# editor / OS
+.DS_Store
+*.swp
